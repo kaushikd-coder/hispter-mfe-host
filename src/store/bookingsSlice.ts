@@ -37,6 +37,6 @@ const bookings = createSlice({
 
 export const bookingsReducer = bookings.reducer;
 
-// Optional selectors (host-side)
+
 export const selectAllBookings = (s: any) => s.bookings?.all ?? [];
 export const selectBookingsCount = (s: any) => (s.bookings?.all ?? []).length;

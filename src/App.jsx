@@ -164,7 +164,7 @@ function Layout({ user, children }) {
 
   return (
     <div className="min-h-screen bg-[#003d3b] text-white">
-      {/* gradient halo */}
+
       <div className="pointer-events-none absolute inset-x-0 top-[-10rem] z-0 mx-auto h-[24rem] max-w-4xl rounded-full bg-emerald-500/20 blur-3xl"></div>
 
       {!hideHeader && <AppHeader user={user} />}
@@ -213,7 +213,7 @@ export default function App() {
             }
           />
 
-          {/* NEW: Booking - List */}
+
           {/* Booking */}
           <Route
             path="/booking"
@@ -254,8 +254,6 @@ export default function App() {
                           Loading booking form…
                         </div>
                       }
-                    // Example of injecting props if the remote accepts them:
-                    // render={({ Component }) => <Component user={user} mode="create" />}
                     />
                   </ErrorBoundary>
                 </div>
@@ -263,7 +261,7 @@ export default function App() {
             }
           />
 
-          {/* Login (no header, full-bleed) */}
+          {/* Login  */}
           <Route
             path="/login"
             element={

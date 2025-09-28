@@ -2,7 +2,7 @@ import { configureStore, combineReducers, ReducersMapObject, AnyAction } from "@
 import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
 
-const staticReducers: ReducersMapObject = {}; // you can add host reducers here
+const staticReducers: ReducersMapObject = {};
 let asyncReducers: ReducersMapObject = {};
 
 function createRootReducer() {

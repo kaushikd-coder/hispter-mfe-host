@@ -33,7 +33,7 @@ module.exports = {
       {
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
-        use: { loader: "babel-loader" }, // uses .babelrc
+        use: { loader: "babel-loader" }, 
       },
       {
         test: /\.css$/i,

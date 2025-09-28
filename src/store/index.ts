@@ -11,7 +11,7 @@ import { bookingsReducer } from "./bookingsSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  bookings: bookingsReducer, // 👈 static, always present
+  bookings: bookingsReducer,
 });
 
 const persisted = persistReducer({ key: "root", storage }, rootReducer);
