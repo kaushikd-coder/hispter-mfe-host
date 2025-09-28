@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "build": "webpack --config webpack.config.js --env app=remote --mode production",
-    "start": "webpack serve --config webpack.config.js --env app=remote --mode development"
+    "start": "webpack serve --config webpack.config.js --env app=remote --mode development",
+    "preview": "npx serve -s dist -p 5000"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
