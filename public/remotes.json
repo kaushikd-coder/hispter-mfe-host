@@ -1,5 +1,6 @@
 {
-  "authApp": "authApp@https://neon-moonbeam-2e9483.netlify.app/remoteEntry.js",
-  "bookingApp": "bookingApp@https://hispter-mfe-booking-app.netlify.app/remoteEntry.js",
-  "reportingApp": "reportingApp@https://hipster-mfe-report.netlify.app/remoteEntry.js"
-} 
+  "authApp": "https://neon-moonbeam-2e9483.netlify.app/remoteEntry.js",
+  "bookingApp": "https://hispter-mfe-booking-app.netlify.app/remoteEntry.js",
+  "reportingApp": "https://hipster-mfe-report.netlify.app/remoteEntry.js"
+}
+
