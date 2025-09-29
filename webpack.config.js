@@ -1,17 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const deps = require("./package.json").dependencies;
 
-module.exports = (env = {}, argv = {}) => {
+module.exports = (_env = {}, argv = {}) => {
   const isProd = argv.mode === "production";
-
-  // static remotes for prod (Netlify URLs)
-  const prodRemotes = {
-    authApp: "authApp@https://neon-moonbeam-2e9483.netlify.app/remoteEntry.js",
-    bookingApp: "bookingApp@https://hispter-mfe-booking-app.netlify.app/remoteEntry.js",
-    reportingApp: "reportingApp@https://hipster-mfe-report.netlify.app/remoteEntry.js",
-  };
 
   return {
     entry: path.resolve(__dirname, "./src/index.js"),
@@ -30,31 +24,22 @@ module.exports = (env = {}, argv = {}) => {
       hot: false,
       liveReload: true,
       historyApiFallback: true,
-      watchFiles: {
-        paths: ["src/**/*", "public/**/*"],
-        options: { usePolling: true, interval: 300 },
-      },
+      watchFiles: { paths: ["src/**/*", "public/**/*"], options: { usePolling: true, interval: 300 } },
       client: { overlay: true, progress: true },
       open: false,
     },
     module: {
       rules: [
-        {
-          test: /\.[jt]sx?$/,
-          exclude: /node_modules/,
-          use: { loader: "babel-loader" },
-        },
-        {
-          test: /\.css$/i,
-          use: ["style-loader", "css-loader", "postcss-loader"],
-        },
+        { test: /\.[jt]sx?$/, exclude: /node_modules/, use: { loader: "babel-loader" } },
+        { test: /\.css$/i, use: ["style-loader", "css-loader", "postcss-loader"] },
       ],
     },
     resolve: { extensions: [".ts", ".tsx", ".js", ".jsx"] },
     plugins: [
       new ModuleFederationPlugin({
         name: "hostApp",
-        remotes: isProd ? prodRemotes : {}, // 👈 key change
+        // keep empty; we load remotes at runtime from remotes.json
+        remotes: {},
         shared: {
           react: { singleton: true, requiredVersion: deps.react },
           "react-dom": { singleton: true, requiredVersion: deps["react-dom"] },
@@ -63,6 +48,15 @@ module.exports = (env = {}, argv = {}) => {
         },
       }),
       new HtmlWebpackPlugin({ template: "./public/index.html", cache: false }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, "public"),
+            to: path.resolve(__dirname, "dist"),
+            globOptions: { ignore: ["**/index.html"] }, // index.html is handled by HtmlWebpackPlugin
+          },
+        ],
+      }),
     ],
   };
 };
